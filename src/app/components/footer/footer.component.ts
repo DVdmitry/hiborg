@@ -11,7 +11,6 @@ import { TranslationService } from '../../i18n/translation.service';
           <div class="footer-brand">
             <div class="footer-logo">
               <span class="logo-text">HIBORG</span>
-              <span class="logo-pro">PRO</span>
             </div>
             <p class="footer-company">{{ t().footer.company }}</p>
           </div>
@@ -37,6 +36,10 @@ import { TranslationService } from '../../i18n/translation.service';
 
         <div class="footer-bottom">
           <p>&copy; {{ currentYear }} {{ t().footer.company }}. {{ t().footer.rights }}.</p>
+          <p class="powered-by">
+            Powered by
+            <a href="https://webappski.com/" target="_blank" rel="noopener">Webappski</a>
+          </p>
         </div>
       </div>
     </footer>
@@ -79,14 +82,6 @@ import { TranslationService } from '../../i18n/translation.service';
       letter-spacing: 0.1em;
     }
 
-    .logo-pro {
-      font-size: 0.5rem;
-      font-weight: 600;
-      color: var(--primary);
-      padding: 2px 4px;
-      border: 1px solid var(--primary);
-      border-radius: 4px;
-    }
 
     .footer-company {
       font-size: 0.875rem;
@@ -142,6 +137,22 @@ import { TranslationService } from '../../i18n/translation.service';
       p {
         font-size: 0.75rem;
         color: var(--text-muted);
+      }
+
+      .powered-by {
+        margin-top: 1rem;
+        font-size: 0.6875rem;
+        opacity: 0.7;
+
+        a {
+          color: var(--primary);
+          font-weight: 500;
+          transition: opacity var(--transition-fast);
+
+          &:hover {
+            opacity: 0.8;
+          }
+        }
       }
     }
   `],

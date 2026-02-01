@@ -5,7 +5,22 @@
       "Bash(git branch:*)",
       "Bash(npm view:*)",
       "Bash(npx @angular/cli@21 update:*)",
-      "Bash(npx @angular/cli@20 update:*)"
+      "Bash(npx @angular/cli@20 update:*)",
+      "Bash(pip3 install rembg pillow)",
+      "Bash(pip3 install:*)",
+      "Bash(python3:*)",
+      "Bash(source:*)",
+      "Bash(pip install:*)",
+      "Bash(python remove_bg.py:*)",
+      "Bash(npm run build:*)",
+      "Bash(ls:*)",
+      "Bash(sips:*)",
+      "Bash(curl:*)",
+      "Bash(pkill:*)",
+      "Bash(lsof:*)",
+      "Bash(xargs kill:*)",
+      "WebFetch(domain:tiski.by)",
+      "WebFetch(domain:www.tiski.by)"
     ]
   }
 }

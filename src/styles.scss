@@ -146,6 +146,11 @@ a {
   cursor: pointer;
   transition: all var(--transition-base);
 
+  @media (max-width: 640px) {
+    padding: 0.875rem 1.5rem;
+    font-size: 0.9375rem;
+  }
+
   &-primary {
     background: var(--primary);
     color: var(--bg-dark);

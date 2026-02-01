@@ -1,17 +1,19 @@
 import { Component, inject } from '@angular/core';
 import { TranslationService } from '../../i18n/translation.service';
+import { AnimateOnScrollDirective } from '../../shared/directives/animate-on-scroll.directive';
 
 @Component({
   selector: 'app-why-us',
   standalone: true,
+  imports: [AnimateOnScrollDirective],
   template: `
     <section id="why-us" class="section why-us">
       <div class="container">
-        <h2 class="section-title text-center">{{ t().whyUs.title }}</h2>
+        <h2 class="section-title text-center" appAnimateOnScroll animationType="fadeInUp">{{ t().whyUs.title }}</h2>
 
         <div class="reasons-grid">
           @for (reason of t().whyUs.reasons; track reason.title; let i = $index) {
-            <div class="reason-card">
+            <div class="reason-card" appAnimateOnScroll animationType="fadeInUp" [animationDelay]="i * 150">
               <div class="reason-number">0{{ i + 1 }}</div>
               <div class="reason-content">
                 <h3>{{ reason.title }}</h3>

@@ -1,21 +1,23 @@
 import { Component, inject } from '@angular/core';
 import { TranslationService } from '../../i18n/translation.service';
+import { AnimateOnScrollDirective } from '../../shared/directives/animate-on-scroll.directive';
 
 @Component({
   selector: 'app-about',
   standalone: true,
+  imports: [AnimateOnScrollDirective],
   template: `
     <section id="about" class="section about">
       <div class="container">
         <div class="about-grid">
-          <div class="about-content">
+          <div class="about-content" appAnimateOnScroll animationType="fadeInLeft">
             <h2 class="section-title">{{ t().about.title }}</h2>
             <p class="about-description">{{ t().about.description }}</p>
             <p class="about-mission">{{ t().about.mission }}</p>
           </div>
 
           <div class="about-values">
-            <div class="value-card card">
+            <div class="value-card card" appAnimateOnScroll animationType="fadeInRight" [animationDelay]="0">
               <div class="value-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
@@ -25,7 +27,7 @@ import { TranslationService } from '../../i18n/translation.service';
               <p>{{ t().about.values.quality.description }}</p>
             </div>
 
-            <div class="value-card card">
+            <div class="value-card card" appAnimateOnScroll animationType="fadeInRight" [animationDelay]="100">
               <div class="value-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
@@ -35,7 +37,7 @@ import { TranslationService } from '../../i18n/translation.service';
               <p>{{ t().about.values.reliability.description }}</p>
             </div>
 
-            <div class="value-card card">
+            <div class="value-card card" appAnimateOnScroll animationType="fadeInRight" [animationDelay]="200">
               <div class="value-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <circle cx="12" cy="12" r="10"/>

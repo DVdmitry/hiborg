@@ -1,16 +1,19 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TranslationService } from '../../i18n/translation.service';
+import { AnimateOnScrollDirective } from '../../shared/directives/animate-on-scroll.directive';
+
+const SUCCESS_STATE_DURATION_MS = 3000;
 
 @Component({
   selector: 'app-contact',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, AnimateOnScrollDirective],
   template: `
     <section id="contact" class="section contact">
       <div class="container">
         <div class="contact-grid">
-          <div class="contact-form-wrapper">
+          <div class="contact-form-wrapper" appAnimateOnScroll animationType="fadeInLeft">
             <h2 class="section-title">{{ t().contact.title }}</h2>
             <p class="contact-description">{{ t().contact.description }}</p>
 
@@ -70,17 +73,17 @@ import { TranslationService } from '../../i18n/translation.service';
           </div>
 
           <div class="contact-info">
-            <div class="info-card glass">
+            <div class="info-card glass" appAnimateOnScroll animationType="fadeInRight" [animationDelay]="0">
               <h3>{{ t().contact.info.address }}</h3>
               <p>{{ t().contact.info.addressValue }}</p>
             </div>
 
-            <div class="info-card glass">
+            <div class="info-card glass" appAnimateOnScroll animationType="fadeInRight" [animationDelay]="100">
               <h3>{{ t().contact.info.warehouse }}</h3>
               <p>{{ t().contact.info.warehouseValue }}</p>
             </div>
 
-            <div class="info-card glass">
+            <div class="info-card glass" appAnimateOnScroll animationType="fadeInRight" [animationDelay]="200">
               <h3>{{ t().contact.info.phones }}</h3>
               <p>
                 <a href="tel:+375173629899">(017) 362-98-99</a><br/>
@@ -89,9 +92,34 @@ import { TranslationService } from '../../i18n/translation.service';
               </p>
             </div>
 
-            <div class="info-card glass">
+            <div class="info-card glass" appAnimateOnScroll animationType="fadeInRight" [animationDelay]="300">
               <h3>{{ t().contact.info.email }}</h3>
               <p><a href="mailto:info@tiski.by">info&#64;tiski.by</a></p>
+            </div>
+
+            <div class="map-container" appAnimateOnScroll animationType="fadeInRight" [animationDelay]="400">
+              <iframe
+                src="https://www.openstreetmap.org/export/embed.html?bbox=27.482%2C53.897%2C27.522%2C53.917&layer=mapnik&marker=53.907%2C27.502"
+                width="100%"
+                height="200"
+                style="border: 0; border-radius: var(--radius-md);"
+                allowfullscreen
+                loading="lazy"
+                title="HIBORG Office Location"
+              ></iframe>
+              <a
+                href="https://www.openstreetmap.org/?mlat=53.907&mlon=27.502#map=15/53.907/27.502"
+                target="_blank"
+                rel="noopener"
+                class="map-link"
+              >
+                {{ currentLang() === 'ru' ? 'Открыть на карте' : 'Open in maps' }}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                  <polyline points="15 3 21 3 21 9"/>
+                  <line x1="10" y1="14" x2="21" y2="3"/>
+                </svg>
+              </a>
             </div>
           </div>
         </div>
@@ -199,6 +227,34 @@ import { TranslationService } from '../../i18n/translation.service';
         }
       }
     }
+
+    .map-container {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-light);
+
+      iframe {
+        display: block;
+        filter: grayscale(50%) invert(92%) hue-rotate(180deg);
+      }
+    }
+
+    .map-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem;
+      color: var(--primary);
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: all var(--transition-fast);
+
+      &:hover {
+        background: rgba(55, 182, 255, 0.1);
+      }
+    }
   `],
 })
 export class ContactComponent {
@@ -216,11 +272,27 @@ export class ContactComponent {
   };
 
   onSubmit(): void {
-    // UI only - just show success state
+    // Create mailto link with form data
+    const subject = encodeURIComponent(
+      this.currentLang() === 'ru'
+        ? `Заявка с сайта HIBORG от ${this.formData.name}`
+        : `HIBORG Website Inquiry from ${this.formData.name}`
+    );
+
+    const body = encodeURIComponent(
+      this.currentLang() === 'ru'
+        ? `Имя: ${this.formData.name}\nEmail: ${this.formData.email}\nТелефон: ${this.formData.phone || 'Не указан'}\n\nСообщение:\n${this.formData.message}`
+        : `Name: ${this.formData.name}\nEmail: ${this.formData.email}\nPhone: ${this.formData.phone || 'Not provided'}\n\nMessage:\n${this.formData.message}`
+    );
+
+    // Open mailto link
+    window.location.href = `mailto:info@tiski.by?subject=${subject}&body=${body}`;
+
+    // Show success state
     this.submitted.set(true);
     setTimeout(() => {
       this.submitted.set(false);
       this.formData = { name: '', email: '', phone: '', message: '' };
-    }, 3000);
+    }, SUCCESS_STATE_DURATION_MS);
   }
 }

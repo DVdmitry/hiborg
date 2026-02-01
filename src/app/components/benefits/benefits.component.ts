@@ -1,17 +1,19 @@
 import { Component, inject } from '@angular/core';
 import { TranslationService } from '../../i18n/translation.service';
+import { AnimateOnScrollDirective } from '../../shared/directives/animate-on-scroll.directive';
 
 @Component({
   selector: 'app-benefits',
   standalone: true,
+  imports: [AnimateOnScrollDirective],
   template: `
     <section id="benefits" class="section benefits">
       <div class="container">
-        <h2 class="section-title text-center">{{ t().benefits.title }}</h2>
+        <h2 class="section-title text-center" appAnimateOnScroll animationType="fadeInUp">{{ t().benefits.title }}</h2>
 
         <div class="benefits-grid">
           @for (item of t().benefits.items; track item.title; let i = $index) {
-            <div class="benefit-card card" [style.animation-delay]="i * 0.1 + 's'">
+            <div class="benefit-card card" appAnimateOnScroll animationType="scaleIn" [animationDelay]="i * 100">
               <div class="benefit-icon">
                 @switch (i) {
                   @case (0) {

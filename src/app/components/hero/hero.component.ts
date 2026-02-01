@@ -6,7 +6,10 @@ import { TranslationService } from '../../i18n/translation.service';
   standalone: true,
   template: `
     <section class="hero">
-      <div class="hero-bg"></div>
+      <div class="hero-bg">
+        <img src="/assets/images/hero-bg.jpg" alt="" class="hero-bg-image" />
+        <div class="hero-overlay"></div>
+      </div>
       <div class="hero-glow"></div>
 
       <div class="container hero-content">
@@ -14,7 +17,6 @@ import { TranslationService } from '../../i18n/translation.service';
           <div class="logo-badge">
             <span class="logo-text">HIBORG</span>
           </div>
-          <span class="logo-pro">PRO</span>
         </div>
 
         <h1 class="hero-title animate-fadeInUp" style="animation-delay: 0.1s">
@@ -64,14 +66,35 @@ import { TranslationService } from '../../i18n/translation.service';
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      padding-top: 80px;
+      padding: 120px var(--space-md) 80px;
+
+      @media (max-width: 768px) {
+        padding: 100px var(--space-sm) 60px;
+      }
     }
 
     .hero-bg {
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, #000000 0%, #0A1628 50%, #000000 100%);
       z-index: -2;
+    }
+
+    .hero-bg-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.7) 0%,
+        rgba(0, 0, 0, 0.5) 50%,
+        rgba(0, 0, 0, 0.8) 100%
+      );
     }
 
     .hero-glow {
@@ -81,7 +104,7 @@ import { TranslationService } from '../../i18n/translation.service';
       transform: translate(-50%, -50%);
       width: 800px;
       height: 800px;
-      background: radial-gradient(circle, rgba(55, 182, 255, 0.15) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(55, 182, 255, 0.2) 0%, transparent 70%);
       z-index: -1;
       animation: pulse 4s ease-in-out infinite;
     }
@@ -93,7 +116,8 @@ import { TranslationService } from '../../i18n/translation.service';
 
     .hero-content {
       text-align: center;
-      max-width: 800px;
+      max-width: 900px;
+      padding: var(--space-lg) 0;
     }
 
     .hero-logo {
@@ -101,14 +125,15 @@ import { TranslationService } from '../../i18n/translation.service';
       align-items: center;
       justify-content: center;
       gap: 1rem;
-      margin-bottom: 2rem;
+      margin-bottom: 2.5rem;
     }
 
     .logo-badge {
-      background: var(--bg-dark);
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
       border: 3px solid var(--text-primary);
       border-radius: var(--radius-lg);
-      padding: 1rem 2.5rem;
+      padding: 1.25rem 3rem;
       position: relative;
 
       &::before {
@@ -121,37 +146,35 @@ import { TranslationService } from '../../i18n/translation.service';
     }
 
     .logo-text {
-      font-size: clamp(2rem, 6vw, 4rem);
+      font-size: clamp(2.5rem, 8vw, 5rem);
       font-weight: 700;
       color: var(--primary);
       letter-spacing: 0.15em;
-      text-shadow: 0 0 30px rgba(55, 182, 255, 0.5);
-    }
-
-    .logo-pro {
-      font-size: 0.875rem;
-      font-weight: 600;
-      color: var(--primary);
-      padding: 0.25rem 0.75rem;
-      border: 1px solid var(--primary);
-      border-radius: var(--radius-sm);
+      text-shadow: 0 0 40px rgba(55, 182, 255, 0.6);
     }
 
     .hero-title {
-      margin-bottom: 1.5rem;
+      margin-bottom: 2rem;
       color: var(--text-primary);
+      text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
     }
 
     .hero-description {
-      font-size: 1.25rem;
-      max-width: 600px;
-      margin: 0 auto 2.5rem;
+      font-size: 1.375rem;
+      max-width: 650px;
+      margin: 0 auto 3rem;
       color: var(--text-secondary);
+      line-height: 1.7;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+
+      @media (max-width: 768px) {
+        font-size: 1.125rem;
+      }
     }
 
     .hero-actions {
       display: flex;
-      gap: 1rem;
+      gap: 1.5rem;
       justify-content: center;
       flex-wrap: wrap;
       margin-bottom: 4rem;
@@ -159,9 +182,19 @@ import { TranslationService } from '../../i18n/translation.service';
 
     .hero-stats {
       display: flex;
-      gap: 3rem;
+      gap: 4rem;
       justify-content: center;
       flex-wrap: wrap;
+      padding: 2rem;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(10px);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-light);
+
+      @media (max-width: 768px) {
+        gap: 2rem;
+        padding: 1.5rem;
+      }
     }
 
     .stat {
@@ -170,15 +203,19 @@ import { TranslationService } from '../../i18n/translation.service';
 
     .stat-value {
       display: block;
-      font-size: 2.5rem;
+      font-size: 3rem;
       font-weight: 700;
       color: var(--primary);
-      text-shadow: 0 0 20px rgba(55, 182, 255, 0.3);
+      text-shadow: 0 0 30px rgba(55, 182, 255, 0.4);
+
+      @media (max-width: 768px) {
+        font-size: 2.25rem;
+      }
     }
 
     .stat-label {
       font-size: 0.875rem;
-      color: var(--text-muted);
+      color: var(--text-secondary);
       text-transform: uppercase;
       letter-spacing: 0.1em;
     }
