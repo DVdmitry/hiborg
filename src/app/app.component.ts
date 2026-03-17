@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HeaderComponent } from './components/header/header.component';
 import { HeroComponent } from './components/hero/hero.component';
 import { ProductShowcaseComponent } from './components/product-showcase/product-showcase.component';
@@ -17,6 +17,7 @@ import { CookieConsentComponent } from './components/cookie-consent/cookie-conse
 @Component({
   selector: 'app-root',
   standalone: true,
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
     HeaderComponent,
     HeroComponent,

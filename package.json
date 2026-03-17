@@ -19,6 +19,7 @@
     "@angular/router": "^21.1.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
+    "typelessform-widget": "^1.0.0-beta.2",
     "zone.js": "~0.15.0"
   },
   "devDependencies": {

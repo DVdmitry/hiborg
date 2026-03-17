@@ -20,7 +20,10 @@
       "Bash(lsof:*)",
       "Bash(xargs kill:*)",
       "WebFetch(domain:tiski.by)",
-      "WebFetch(domain:www.tiski.by)"
+      "WebFetch(domain:www.tiski.by)",
+      "Bash(netlify status:*)",
+      "Bash(netlify deploy:*)",
+      "Bash(netlify sites:create:*)"
     ]
   }
 }
